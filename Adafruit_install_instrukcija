@@ -1,0 +1,8 @@
+Reikia naudoti:
+
+sudo apt-get update
+sudo apt-get install build-essential python-dev
+
+Nueiti i Adafruit_Python_DHT direktorija
+
+sudo python setup.py install
