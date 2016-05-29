@@ -3,6 +3,8 @@
 import Adafruit_DHT as dht
 import argparse
 import sys
+import logs
+from datetime import datetime
 
 # Sensor list
 sensors = { '11': dht.DHT11,
@@ -11,6 +13,9 @@ sensors = { '11': dht.DHT11,
 
 # GPIOs list
 gpio = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+
+# Dictionary with readings
+readings = dict()
 
 def listUnique(list):
     """Checks if given list has unique arguments"""
@@ -28,7 +33,7 @@ def parserCheck(argz):
             sys.exit("error:Incorrect GPIOs given")
     if not listUnique(argz.g):
         sys.exit("error:Some GPIOs are given twice")
-    print ('GPIOs: OK')
+    print ('GPIOs given: OK')
 
 def parser():
     """Parses arguments from command line"""
@@ -42,17 +47,28 @@ def parser():
     parserCheck(argz)
     return argz
 
-print (sys.argv[0])
 
 argz = parser()
 sensor = sensors[argz.s]
 print("Test passed!\n")
 
+"""Reads GPIOs"""
+print ("Reading sensors...")
 for gp in argz.g:
+    readings[str(gp)] = dict()
     humidity, temperature = dht.read(sensor, gp)
     print ("GPIO{}".format(gp))
+
     if humidity is not None and temperature is not None:
         print ('Temperature: {0:0.1f}\nHumidity: {1:0.1f}'.format(temperature, humidity))
+        readings[str(gp)]['temp'] = float('{0:0.1f}'.format(temperature))
+        readings[str(gp)]['humid'] = float('{0:0.1f}'.format(humidity))
+        readings[str(gp)]['timestamp'] = datetime.now()
     else:
         print ("Failed to get reading")
+        readings[str(gp)]['temp'] = None
+        readings[str(gp)]['humid'] = None
+        readings[str(gp)]['timestamp'] = datetime.now()
     print ("")
+
+logs.log(readings)
