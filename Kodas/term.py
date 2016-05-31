@@ -3,8 +3,11 @@
 import Adafruit_DHT as dht
 import argparse
 import sys
-import logs
 from datetime import datetime
+
+import logs
+import emailsend
+import test
 
 # Sensor list
 sensors = { '11': dht.DHT11,
@@ -72,3 +75,4 @@ for gp in argz.g:
     print ("")
 
 logs.log(readings)
+emailsend.sendEmail(readings)
