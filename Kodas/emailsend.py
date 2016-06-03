@@ -5,13 +5,13 @@ from email.mime.text import MIMEText
 def formatString(readings):
     fullstring = ""
     for key,value in readings.items():
-        fullstring = fullstring + "GPIO {}\nTime: {}\nTemperature: {}\nHumidity: {}\n\n".format(key, value['timestamp'].strftime("%Y-%m-%d %H:%M:%S"), value['temp'], value['humid'])
+        fullstring = fullstring + "GPIO {}\nTemperature: {}\nHumidity: {}\nTime: {}\n\n".format(key, value['temp'], value['humid'], value['timestamp'].strftime("%Y-%m-%d %H:%M:%S"))
     return fullstring
 
 """Send email"""
-def sendEmail(readings):
+def sendEmail(readings, emails):
     msg = MIMEText("Hello\n\nthis is automatically sent message about temperature and humidity from VU MIF supercomputer room.\n\n" + formatString(readings))
-    emailTo = ["temisoklis@gmail.com"]    
+    emailTo = emails    
 
     msg["Subject"] = "VU MIF Supercomputer"
     msg["From"] = "martynastest1@gmail.com"
@@ -24,4 +24,4 @@ def sendEmail(readings):
     s.login('martynastest1@gmail.com', 'martynas')
     s.sendmail(msg["From"], emailTo, msg.as_string())
     s.close()
-    print ("done")
+    print ("\n!!! Email is sent!!!\n")

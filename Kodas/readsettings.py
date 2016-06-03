@@ -18,6 +18,11 @@ def generateSettings():
     gid = stat('.').st_gid          # Get directory owner group
     chown("settings", uid, gid)     # Change file owner
 
+"""Checks if given list has unique arguments"""
+def listUnique(list):
+    setset = set()
+    return not any(element in setset or setset.add(element) for element in list)
+
 """Splits given value to list"""
 def splitValue(key, value):         # Error if lines contain bad symbols
     if not re.match("^[a-z0-9.@ ]*$", value):
@@ -35,6 +40,9 @@ def splitValue(key, value):         # Error if lines contain bad symbols
         except Exception:
             print ("Settings file error. Line near '{}'. Check example".format(key))
             exit()
+        if not listUnique(value):
+            print("Settings file error. 2 or more same GPIOs given.")
+            exit()
 
     if key == 'email':  # Checks if email is good and splits to list
         value = value.split(' ')
@@ -45,7 +53,9 @@ def splitValue(key, value):         # Error if lines contain bad symbols
             if not len(elem.split('.')) > 1:
                 print ("Settings file error. Line near '{}'. Bad email given.".format(key))
                 exit()
-
+        if not listUnique(value):
+                print ("Settings file error. 2 or more same emails given.")
+                exit()
     return value
 
 """Checks if settings file has all needed information: type, gpio and email"""

@@ -6,8 +6,8 @@ import sys
 from datetime import datetime
 
 import logs
-import emailsend
-import readsettings
+from emailsend import sendEmail
+from readsettings import readSettings
 
 # Sensor list
 sensors = { '11': dht.DHT11,
@@ -20,49 +20,24 @@ defSensor = '2302'
 # GPIOs list
 gpio = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 
-# Dictionary with readings
+# Dictionary with readings from GPIOs
 readings = dict()
 
-def listUnique(list):
-    """Checks if given list has unique arguments"""
-    setset = set()
-    return not any(element in setset or setset.add(element) for element in list)
+# Critical temperature values
+minTemp = 10    # Minimal temperature
+maxTemp = 30    # Maximal temperature
 
-def parserCheck(argz):
-    """Checks if given command-line arguments are correct"""
-    if argz.s in sensors:
-        print ('Sensor type: OK')
-    else:
-        sys.exit("error:Incorrect sensor type. '11' '22' '2302' are correct")
-    for gp in argz.g:
-        if not gp in gpio:
-            sys.exit("error:Incorrect GPIOs given")
-    if not listUnique(argz.g):
-        sys.exit("error:Some GPIOs are given twice")
-    print ('GPIOs given: OK')
+minHum = 30     # Minimal humidity
+maxHum = 70     # Maximal humidity
 
-def parser():
-    """Parses arguments from command line"""
-
-    parser = argparse.ArgumentParser()
-    # Sensor type
-    parser.add_argument('-s', nargs='?', default='2302', help="Sensor type. For exampe 2302 for AM2302 sensor")
-    # GPIOs
-    parser.add_argument('-g', nargs='+', required=True, type=int, help="GPIOs numbers. For example 14 for GPIO14")
-    argz = parser.parse_args()
-    parserCheck(argz)
-    return argz
-
-
-argz = parser()
-sensor = sensors[argz.s]
-print("Test passed!\n")
+setings = readSettings(defSensor, sensors)  # Reads settings file
+print("Settings read successfully\n")
 
 """Reads GPIOs"""
 print ("Reading sensors...")
-for gp in argz.g:
+for gp in setings['gpio']:
     readings[str(gp)] = dict()
-    humidity, temperature = dht.read(sensor, gp)
+    humidity, temperature = dht.read(sensors[setings['type']], gp)
     print ("GPIO{}".format(gp))
 
     if humidity is not None and temperature is not None:
@@ -78,6 +53,12 @@ for gp in argz.g:
     print ("")
 
 logs.log(readings)
-#emailsend.sendEmail(readings)
-sett = readsettings.readSettings(defSensor, sensors)
-print(sett)
+
+"""Checks if data values are normal. If not, sends emails"""
+needToSendEmail = False     # Need to send email?
+for key,value in readings.items():
+    if minTemp <= value['temp'] <= maxTemp or minHum <= value['humid'] <= maxHum or value['temp'] == None or value['humid'] == None:
+        needToSendEmail = True
+
+if needToSendEmail:
+    sendEmail(readings, setings['email'])
