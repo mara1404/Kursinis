@@ -7,12 +7,15 @@ from datetime import datetime
 
 import logs
 import emailsend
-import test
+import readsettings
 
 # Sensor list
 sensors = { '11': dht.DHT11,
             '22': dht.DHT22,
             '2302':dht.AM2302}
+
+# Default sensor type
+defSensor = '2302'
 
 # GPIOs list
 gpio = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
@@ -75,4 +78,6 @@ for gp in argz.g:
     print ("")
 
 logs.log(readings)
-emailsend.sendEmail(readings)
+#emailsend.sendEmail(readings)
+sett = readsettings.readSettings(defSensor, sensors)
+print(sett)
