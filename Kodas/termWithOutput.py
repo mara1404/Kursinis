@@ -33,20 +33,26 @@ maxHum = 70     # Maximal humidity
 
 """reads settings from file 'settings' """
 setings = readSettings(defSensor, sensors, gpio)  # Reads settings file
+print("Settings read successfully\n")
 
 """Reads GPIOs"""
+print ("Reading sensors...")
 for gp in setings['gpio']:
     readings[str(gp)] = dict()
     humidity, temperature = dht.read_retry(sensors[setings['type']], gp)
+    print ("GPIO{}".format(gp))
 
     if humidity is not None and temperature is not None:
+        print ('Temperature: {0:0.1f}\nHumidity: {1:0.1f}'.format(temperature, humidity))
         readings[str(gp)]['temp'] = float('{0:0.1f}'.format(temperature))
         readings[str(gp)]['humid'] = float('{0:0.1f}'.format(humidity))
         readings[str(gp)]['timestamp'] = datetime.now()
     else:
+        print ("Failed to get reading")
         readings[str(gp)]['temp'] = None
         readings[str(gp)]['humid'] = None
         readings[str(gp)]['timestamp'] = datetime.now()
+    print ("")
 
 logs.log(readings)
 

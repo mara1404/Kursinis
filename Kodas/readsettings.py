@@ -24,7 +24,7 @@ def listUnique(list):
     return not any(element in setset or setset.add(element) for element in list)
 
 """Splits given value to list"""
-def splitValue(key, value):         # Error if lines contain bad symbols
+def splitValue(key, value, gpios):         # Error if lines contain bad symbols
     if not re.match("^[a-z0-9.@ ]*$", value):
         print ("Settings file error. Line near '{}' contains bad symbols".format(key))
         print ("Allowed symbols are letters, numbers, spaces, '.', '@'")
@@ -43,6 +43,11 @@ def splitValue(key, value):         # Error if lines contain bad symbols
         if not listUnique(value):
             print("Settings file error. 2 or more same GPIOs given.")
             exit()
+        for each in value:
+            if not each in gpios:
+		print("Settings file error. Bad GPIOs given.")
+                print("GPIO must be number 1 - 27")
+                exit()
 
     if key == 'email':  # Checks if email is good and splits to list
         value = value.split(' ')
@@ -99,7 +104,7 @@ def checkKeyValue(key, value, sett, defaulttype, sensors):
 
 
 """Reads settings from file"""
-def readSettings(defaulttype, sensors):
+def readSettings(defaulttype, sensors, gpios):
     if not path.isfile('settings'): # If no settings file - generate it and exit
         generateSettings()
         print("Settings file error. Settings file missing")
@@ -123,7 +128,7 @@ def readSettings(defaulttype, sensors):
         
         key, value = checkKeyValue(key, value, sett, defaulttype, sensors)
         if key in ['email', 'gpio']:
-            value = splitValue(key, value)
+            value = splitValue(key, value, gpios)
         sett[key.lower()] = value
         
     file.close()

@@ -1,0 +1,84 @@
+time		GPIO	Temperature, C	Humidity, %
+20:59:44	5	None		None
+20:59:43	4	None		None
+20:59:45	7	None		None
+20:59:44	6	None		None
+
+21:01:08	24	None		None
+21:01:09	25	None		None
+21:01:09	26	None		None
+21:01:10	27	None		None
+21:01:06	20	None		None
+21:01:07	21	None		None
+21:01:07	22	None		None
+21:01:08	23	None		None
+21:01:10	28	None		None
+21:01:11	29	None		None
+21:00:56	1	None		None
+21:00:57	3	None		None
+21:00:57	2	None		None
+21:00:58	5	20.0		50.8
+21:00:58	4	None		None
+21:00:59	7	None		None
+21:00:59	6	None		None
+21:01:00	9	None		None
+21:01:00	8	None		None
+21:01:01	11	None		None
+21:01:01	10	None		None
+21:01:03	13	-9.7		3303.6
+21:01:02	12	None		None
+21:01:04	15	None		None
+21:01:03	14	21.7		48.7
+21:01:05	17	None		None
+21:01:04	16	None		None
+21:01:06	19	None		None
+21:01:05	18	None		None
+
+21:02:12	13	None		None
+21:02:11	5	21.1		49.4
+21:02:12	14	None		None
+
+21:02:30	13	None		None
+21:02:30	5	None		None
+21:02:31	14	None		None
+
+21:03:12	13	None		None
+21:03:11	5	None		None
+21:03:13	14	None		None
+
+21:03:15	13	None		None
+21:03:15	5	None		None
+21:03:16	14	None		None
+
+21:03:18	13	None		None
+21:03:17	5	None		None
+21:03:18	14	None		None
+
+21:03:20	13	None		None
+21:03:20	5	20.5		48.2
+21:03:21	14	None		None
+
+21:03:23	13	None		None
+21:03:22	5	None		None
+21:03:23	14	None		None
+
+21:03:25	13	None		None
+21:03:25	5	None		None
+21:03:26	14	None		None
+
+21:03:28	13	None		None
+21:03:27	5	None		None
+21:03:28	14	None		None
+
+21:04:59	13	9.7		3298.5
+21:04:44	5	20.4		48.1
+21:05:00	14	21.6		45.8
+
+21:06:02	13	19.4		42.6
+21:05:59	5	19.9		47.2
+21:06:05	14	21.2		42.8
+
+21:06:31	13	19.3		42.3
+21:06:25	5	19.6		46.4
+21:06:36	14	21.1		42.4
+

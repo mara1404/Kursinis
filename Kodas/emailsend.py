@@ -14,14 +14,13 @@ def sendEmail(readings, emails):
     emailTo = emails    
 
     msg["Subject"] = "VU MIF Supercomputer"
-    msg["From"] = "martynastest1@gmail.com"
+    msg["From"] = "termometrassuperkomp@gmail.com"
     msg["To"] = ",".join(emailTo)
 
     s = smtplib.SMTP("smtp.gmail.com", 587)
     s.ehlo()
     s.starttls()
     s.ehlo()
-    s.login('martynastest1@gmail.com', 'martynas')
+    s.login('termometrassuperkomp@gmail.com', 'kursinis')
     s.sendmail(msg["From"], emailTo, msg.as_string())
     s.close()
-    print ("\n!!! Email is sent!!!\n")
