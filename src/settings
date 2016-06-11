@@ -1,0 +1,8 @@
+# Sensor type. 11 22 or 2302
+type: 2302
+
+# Used GPIOs (separate with spaces)
+GPIO: 5 13 14   	
+
+# Email addresses (separate with spaces). Used to send errors
+email: temisoklis@gmail.com
