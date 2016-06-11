@@ -1,0 +1,40 @@
+Temperatûros stebëjimo sistemos kûrimas
+
+Darbà atliko 3 kurso studentai:
+	Tomas Novikovas VU MIF IT 4gr
+	Martynas Raila VU MIF IT 1gr
+
+Turinys:
+	doc/ - failas su kursinio darbo apraðu ir naudojamomis iliustracijomis
+	src/ - failas su programos kodu
+		logs/ - direktorija, kurioje kaupiama nuskaitytø sensoriø informacija (log'ai)
+		emailsend.py - metodai, naudojami siøsti el. laiðkus
+		getStringforCacti.py - metodai, naudojami paruoðti duomenis siuntimui á Cacti
+		logs.py - metodai, naudojami raðyti log'us
+		readsettings.py - metodai, nuskaitantys nustatymus
+		settings - nustatymø failas
+		settingsExample - pavyzdiniai nustatymai
+		term.py - PROGRAMA LEIDÞIAMA ÐIUO FAILU IÐ CACTI
+		termWithOutput.py - galima programà leisti ðiuo failu be Cacti sistemos (nuskaitys sensorius 1 kartà). Taip pat rodyt output komandinëje eilutëje
+
+
+Naudojama papildoma biblioteka - Adafruit_Python_DHT
+	Instaliavimas:
+
+	1. Klonuoti bibliotekà ið git
+		git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+
+	2. Instaliuoti Python 2.7
+
+		sudo apt-get update
+		sudo apt-get install build-essential python-dev
+
+	3. Instaliuoti bibliotekà
+
+		cd Adafruit_Python_DHT
+		sudo python setup.py install
+
+	
+Programos paleidimas:
+	1. Pereiti á src/ katalogà
+	2. sudo python term.py - programa bus paleidþiama vienà kartà
