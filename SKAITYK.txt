@@ -7,15 +7,18 @@ Darbà atliko 3 kurso studentai:
 Turinys:
 	doc/ - failas su kursinio darbo apraðu ir naudojamomis iliustracijomis
 	src/ - failas su programos kodu
-		logs/ - direktorija, kurioje kaupiama nuskaitytø sensoriø informacija (log'ai)
-		emailsend.py - metodai, naudojami siøsti el. laiðkus
-		getStringforCacti.py - metodai, naudojami paruoðti duomenis siuntimui á Cacti
-		logs.py - metodai, naudojami raðyti log'us
-		readsettings.py - metodai, nuskaitantys nustatymus
-		settings - nustatymø failas
-		settingsExample - pavyzdiniai nustatymai
-		term.py - PROGRAMA LEIDÞIAMA ÐIUO FAILU IÐ CACTI
-		termWithOutput.py - galima programà leisti ðiuo failu be Cacti sistemos (nuskaitys sensorius 1 kartà). Taip pat rodyt output komandinëje eilutëje
+		logs/ 						- direktorija, kurioje kaupiama nuskaitytø sensoriø informacija (log'ai)
+		emailsend.py 				- metodai, naudojami siøsti el. laiðkus
+		getStringforCacti.py 		- metodai, naudojami paruoðti duomenis siuntimui á Cacti
+		logs.py 					- metodai, naudojami raðyti log'us
+		readsettings.py 			- metodai, nuskaitantys nustatymus
+		settings 					- nustatymø failas
+		settingsExample 			- pavyzdiniai nustatymai
+		term.py 					- PROGRAMA LEIDÞIAMA ÐIUO FAILU IÐ CACTI
+		termWithOutput.py 			- galima programà leisti ðiuo failu be Cacti sistemos (nuskaitys sensorius 1 kartà). Taip pat rodyt output komandinëje eilutëje
+		logResultsToFile.sh			- áraðo paskutinius nuskaitytus duomenis á failà
+		readLastTemperature.sh		- atspausdina paskutinius nuskaitytus duomenis
+		readTemperatureFromRemote.sh
 
 
 Naudojama papildoma biblioteka - Adafruit_Python_DHT
